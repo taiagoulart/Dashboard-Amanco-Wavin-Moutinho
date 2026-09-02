@@ -5,18 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Moutinho · Campanha Amanco Wavin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --red:#E31E24; --black:#0A0A0A; --white:#FFFFFF;
     --gray-50:#F7F7F8; --gray-100:#F0F0F2; --gray-200:#E7E7EA; --gray-400:#ABABB2; --gray-500:#8A8A8E;
     --green:#1FAA59; --green-bg:#E9F8EF;
     --blue:#2E7DD1; --blue-bg:#EAF3FC;
-    --amber:#C9911A; --amber-bg:#FDF3DD;
+    --amber:#B8720A; --amber-bg:#FFF1D6;
     --orange:#D9711F; --orange-bg:#FCEBDD;
     --crit:#D93A3A; --crit-bg:#FCE8E8;
-    --gold:#D9A400; --gold-bg:#FFF7DE;
-    --neutral-bg:#F0F0F2;
+    --gold:#C99400; --gold-bg:#FFF7DE;
+    --purple:#6E4FD9; --purple-bg:#EFEAFD;
     --radius:20px; --radius-sm:14px; --radius-xs:10px;
     --shadow:0 2px 18px rgba(10,10,10,0.06);
     --shadow-md:0 8px 28px rgba(10,10,10,0.08);
@@ -35,25 +35,23 @@
 
   /* ---------- SIDEBAR ---------- */
   .sidebar{
-    width:232px; flex-shrink:0; background:var(--white);
+    width:236px; flex-shrink:0; background:var(--white);
     border-right:1px solid var(--gray-200);
-    display:flex; flex-direction:column; padding:28px 20px;
+    display:flex; flex-direction:column; padding:24px 18px;
     position:sticky; top:0; height:100vh;
   }
-  .sidebar-logo{display:flex; align-items:center; gap:10px; padding:0 4px 6px 4px;}
-  .sidebar-logo img{width:34px; height:34px; border-radius:8px; object-fit:cover;}
-  .sidebar-logo .lg-name{font-weight:800; font-size:15px; letter-spacing:0.2px;}
-  .sidebar-logo .lg-sub{font-size:10px; color:var(--gray-500); font-weight:600; letter-spacing:0.4px; text-transform:uppercase;}
+  .sidebar-logo{padding:2px 2px 14px 2px;}
+  .sidebar-logo img{width:100%; max-width:172px; display:block; border-radius:10px;}
   .campaign-tag{
     display:flex; align-items:center; gap:6px; background:linear-gradient(135deg,var(--red),#B8151A);
     color:#fff; font-size:10.5px; font-weight:800; letter-spacing:0.3px; border-radius:100px;
-    padding:6px 12px; margin:8px 4px 24px 4px; width:fit-content;
+    padding:7px 13px; margin:0 2px 22px 2px; width:fit-content;
   }
 
   .nav{display:flex; flex-direction:column; gap:4px; flex:1;}
   .nav-item{
     display:flex; align-items:center; gap:12px; padding:11px 14px; border-radius:12px;
-    color:var(--gray-500); font-weight:600; font-size:14.5px; border:none; background:none;
+    color:var(--gray-500); font-weight:700; font-size:14px; border:none; background:none;
     text-align:left; width:100%; transition:background .15s, color .15s;
   }
   .nav-item svg{width:19px; height:19px; flex-shrink:0;}
@@ -66,35 +64,11 @@
 
   /* ---------- MAIN ---------- */
   .main{flex:1; min-width:0; display:flex; flex-direction:column;}
-  .topbar{
-    display:flex; align-items:center; justify-content:space-between; gap:16px;
-    padding:26px 40px 0 40px;
-  }
+  .topbar{padding:26px 40px 0 40px;}
   .topbar h1{font-size:23px; font-weight:800; letter-spacing:-0.3px;}
   .topbar .sub{font-size:13.5px; color:var(--gray-500); font-weight:600; margin-top:3px;}
 
   .content{padding:20px 40px 60px 40px; max-width:1180px; width:100%;}
-
-  /* Vendor selector */
-  .vendor-select{position:relative;}
-  .vendor-btn{
-    display:flex; align-items:center; gap:10px; background:var(--gray-50);
-    border:1px solid var(--gray-200); border-radius:100px; padding:6px 16px 6px 6px;
-    font-weight:700; font-size:13.5px; color:var(--black);
-  }
-  .vendor-btn img, .vendor-btn .ph{width:30px; height:30px; border-radius:50%; object-fit:cover; flex-shrink:0;}
-  .vendor-btn .ph{background:var(--black); color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800;}
-  .vendor-btn .chev{width:14px; height:14px; color:var(--gray-500); margin-left:2px;}
-  .vendor-menu{
-    position:absolute; right:0; top:calc(100% + 8px); background:#fff; border:1px solid var(--gray-200);
-    border-radius:14px; box-shadow:var(--shadow-md); width:220px; max-height:340px; overflow-y:auto;
-    z-index:50; display:none; padding:8px;
-  }
-  .vendor-menu.open{display:block;}
-  .vm-item{display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:10px; font-size:13.5px; font-weight:600; width:100%; border:none; background:none; text-align:left;}
-  .vm-item:hover{background:var(--gray-50);}
-  .vm-item img, .vm-item .ph{width:26px; height:26px; border-radius:50%; object-fit:cover;}
-  .vm-item .ph{background:var(--black); color:#fff; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800;}
 
   /* Grid helpers */
   .grid{display:grid; gap:16px;}
@@ -103,117 +77,174 @@
     background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius);
     padding:22px; box-shadow:var(--shadow);
   }
-  .card.flat{box-shadow:none;}
   .section-label{
     font-size:11px; font-weight:800; letter-spacing:0.6px; text-transform:uppercase; color:var(--gray-500);
-    margin:30px 0 12px 0;
+    margin:30px 0 12px 0; display:flex; align-items:center; gap:6px;
   }
   .section-label:first-child{margin-top:0;}
 
-  /* Hero */
-  .hero{display:flex; align-items:center; gap:24px; padding:26px 28px;}
+  /* Hero (Por Vendedor) */
+  .hero{display:flex; align-items:center; justify-content:space-between; gap:24px; padding:22px 26px; flex-wrap:wrap;}
+  .hero-l{display:flex; align-items:center; gap:20px;}
   .hero img, .hero .ph{width:64px; height:64px; border-radius:50%; object-fit:cover; border:3px solid var(--gray-100); flex-shrink:0;}
   .hero .ph{background:var(--black); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:22px;}
   .hero-mid .hgreet{font-size:20px; font-weight:800;}
   .hero-mid .hgreet span{color:var(--gray-500); font-weight:600;}
   .hero-mid .hsub{font-size:13px; color:var(--gray-500); font-weight:600; margin-top:3px;}
+  .switch-btn{
+    background:var(--gray-50); border:1px solid var(--gray-200); color:var(--black); font-weight:700; font-size:12.5px;
+    padding:9px 16px; border-radius:100px; display:flex; align-items:center; gap:6px;
+  }
+  .switch-btn:hover{background:var(--gray-100);}
+
+  /* Vendor picker (Por Vendedor blank state) */
+  .vp-title{font-weight:800; font-size:16px; margin-bottom:4px;}
+  .vp-sub{font-size:13px; color:var(--gray-500); font-weight:600; margin-bottom:20px;}
+  .vp-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
+  .vp-card{
+    display:flex; flex-direction:column; align-items:center; gap:8px; padding:18px 10px;
+    border:1.5px solid var(--gray-200); border-radius:16px; background:#fff; transition:transform .15s, box-shadow .15s, border-color .15s;
+  }
+  .vp-card:hover{transform:translateY(-3px); box-shadow:var(--shadow-md); border-color:var(--red);}
+  .vp-card img, .vp-card .ph{width:56px; height:56px; border-radius:50%; object-fit:cover;}
+  .vp-card .ph{background:var(--black); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:18px;}
+  .vp-card .vp-name{font-weight:800; font-size:13.5px;}
+  .vp-card .vp-tags{display:flex; gap:4px;}
+  .vp-dot{width:8px; height:8px; border-radius:50%;}
 
   /* Challenge cards */
   .challenge-card{padding:24px;}
-  .ch-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .ch-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; gap:10px;}
   .ch-tag{display:flex; align-items:center; gap:8px;}
-  .ch-ic{width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0;}
-  .ch-title{font-weight:800; font-size:14.5px;}
-  .ch-desc{font-size:11.5px; color:var(--gray-500); font-weight:600;}
-  .ch-badge{font-size:11px; font-weight:800; padding:5px 11px; border-radius:100px;}
-  .ch-val{font-size:26px; font-weight:800; margin:4px 0 2px 0;}
+  .ch-ic{width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;}
+  .ch-title{font-weight:800; font-size:14px; line-height:1.25;}
+  .ch-desc{font-size:11px; color:var(--gray-500); font-weight:600;}
+  .ch-badge{font-size:11px; font-weight:800; padding:5px 11px; border-radius:100px; white-space:nowrap;}
+  .ch-val{font-size:25px; font-weight:800; margin:4px 0 2px 0;}
   .ch-target{font-size:12px; color:var(--gray-500); font-weight:700; margin-bottom:12px;}
   .bar-track{height:10px; background:var(--gray-100); border-radius:100px; overflow:hidden; position:relative;}
   .bar-fill{height:100%; border-radius:100px; transition:width 1s cubic-bezier(.2,.9,.3,1); width:0;}
-  .bar-flag{position:absolute; top:-4px; width:2px; height:18px; background:var(--black); opacity:.35;}
-  .ch-foot{display:flex; justify-content:space-between; margin-top:8px; font-size:11px; font-weight:700; color:var(--gray-500);}
+  .ch-foot{display:flex; justify-content:space-between; margin-top:8px; font-size:11px; font-weight:700; color:var(--gray-500); gap:8px;}
 
-  /* Team pulse */
-  .pulse-card{padding:24px;}
-  .pulse-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
-  .pulse-title{font-weight:800; font-size:14.5px; display:flex; align-items:center; gap:8px;}
-  .pulse-val{font-size:28px; font-weight:800;}
-  .pulse-days{background:var(--gray-50); border-radius:14px; padding:12px 16px; display:flex; align-items:center; gap:10px; font-size:12.5px; font-weight:700; margin-top:14px;}
+  /* Team pulse (Geral) */
+  .pulse-card{padding:26px;}
+  .pulse-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:8px;}
+  .pulse-title{font-weight:800; font-size:15px; display:flex; align-items:center; gap:8px;}
+  .pulse-val{font-size:32px; font-weight:900; color:var(--red);}
+  .pulse-days{background:var(--gray-50); border-radius:14px; padding:12px 16px; display:flex; align-items:center; gap:10px; font-size:12.5px; font-weight:700; margin-top:16px;}
 
   .hmsg{
-    margin-top:16px; background:var(--gray-50); border-radius:14px; padding:13px 16px;
+    margin-top:14px; background:var(--gray-50); border-radius:14px; padding:13px 16px;
     font-size:13.5px; font-weight:700; display:flex; align-items:center; gap:10px;
   }
 
+  /* Mini challenge summary cards (Geral) */
+  .mini-card{padding:20px;}
+  .mini-top{display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+  .mini-stat{font-size:24px; font-weight:900;}
+  .mini-lbl{font-size:11px; color:var(--gray-500); font-weight:700; margin-top:1px;}
+  .mini-leader{
+    margin-top:14px; display:flex; align-items:center; gap:10px; background:var(--gray-50);
+    border-radius:12px; padding:10px 12px;
+  }
+  .mini-leader img, .mini-leader .ph{width:32px; height:32px; border-radius:50%; object-fit:cover;}
+  .mini-leader .ph{background:var(--black); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:12px;}
+  .mini-leader .ml-name{font-weight:800; font-size:12.5px;}
+  .mini-leader .ml-val{font-size:11.5px; color:var(--gray-500); font-weight:700;}
+
+  /* Pizza banner */
+  .pizza-card{
+    display:flex; align-items:center; gap:16px; padding:20px 24px;
+  }
+  .pizza-card.won{background:linear-gradient(120deg,#FFF7DE,#FFEFC2); border-color:#F0D98A;}
+  .pizza-ic{font-size:32px; flex-shrink:0;}
+  .pizza-title{font-weight:800; font-size:14px;}
+  .pizza-sub{font-size:12.5px; color:var(--gray-500); font-weight:600; margin-top:2px;}
+
   /* tabs */
-  .tabs{display:flex; gap:6px; background:var(--gray-50); border-radius:100px; padding:5px; width:fit-content; margin-bottom:24px;}
-  .tab{padding:9px 18px; border-radius:100px; font-size:13px; font-weight:700; color:var(--gray-500); border:none; background:none;}
+  .tabs{display:flex; gap:6px; background:var(--gray-50); border-radius:100px; padding:5px; width:fit-content; margin-bottom:24px; flex-wrap:wrap;}
+  .tab{padding:9px 18px; border-radius:100px; font-size:13px; font-weight:700; color:var(--gray-500); border:none; background:none; white-space:nowrap;}
   .tab.active{background:var(--black); color:#fff;}
 
   /* -------- HORSE RACE -------- */
-  .race-card{padding:26px 28px 22px 28px; overflow:hidden;}
-  .race-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;}
-  .race-title{font-weight:800; font-size:15px; display:flex; align-items:center; gap:8px;}
-  .race-sub{font-size:11.5px; color:var(--gray-500); font-weight:600; margin-bottom:18px;}
-  .track-wrap{position:relative; padding-right:54px;}
-  .track-gatilho{
-    position:absolute; top:0; bottom:0; width:0; border-left:2px dashed var(--red); z-index:2;
-  }
+  .race-card{padding:26px 28px 24px 28px; overflow:hidden; background:linear-gradient(180deg,#fff,#fcfcfd);}
+  .race-title{font-weight:800; font-size:15.5px; display:flex; align-items:center; gap:8px;}
+  .race-sub{font-size:11.5px; color:var(--gray-500); font-weight:600; margin-bottom:20px;}
+  .track-wrap{position:relative; padding-right:44px;}
+  .track-gatilho{position:absolute; top:0; bottom:0; width:0; border-left:2.5px dashed var(--red); z-index:2;}
   .track-gatilho .tg-label{
-    position:absolute; top:-22px; left:50%; transform:translateX(-50%); font-size:9.5px; font-weight:800;
-    color:var(--red); white-space:nowrap; background:#fff; padding:0 4px;
+    position:absolute; top:-20px; left:50%; transform:translateX(-50%); font-size:9.5px; font-weight:800;
+    color:var(--red); white-space:nowrap; background:#fff; padding:0 5px; border-radius:4px;
   }
-  .lane{position:relative; height:46px; margin-bottom:10px; background:var(--gray-50); border-radius:100px;}
+  .lane{position:relative; height:52px; margin-bottom:12px; background:var(--gray-50); border-radius:100px; overflow:visible;}
   .lane:last-child{margin-bottom:0;}
-  .lane-fill{position:absolute; left:0; top:0; bottom:0; border-radius:100px; background:linear-gradient(90deg,#fdeceb,#fbdcda); transition:width 1.1s cubic-bezier(.22,.9,.3,1); width:0;}
-  .lane-fill.top1{background:linear-gradient(90deg,#fff2cf,#ffe6a3);}
+  .lane-fill{position:absolute; left:0; top:0; bottom:0; border-radius:100px; transition:width 1.1s cubic-bezier(.22,.9,.3,1); width:0;
+    background:linear-gradient(90deg,#FBD8D6,#F6B3AF);}
+  .lane-fill.qualified{background:linear-gradient(90deg,#FFC9C6,var(--red));}
+  .lane-fill.pending{background:linear-gradient(90deg,#FFE6C2,#FFCB7D);}
+  .lane-fill.top1{background:linear-gradient(90deg,#FFE79A,var(--gold));}
+  .lane-fill.top2{background:linear-gradient(90deg,#E4E4E8,#B9BBC2);}
+  .lane-fill.top3{background:linear-gradient(90deg,#F0C9A6,#C98A4B);}
   .horse{
     position:absolute; top:50%; transform:translate(-50%,-50%); transition:left 1.1s cubic-bezier(.22,.9,.3,1);
-    left:0; display:flex; align-items:center; gap:8px; white-space:nowrap;
+    left:0; display:flex; align-items:center; gap:8px; white-space:nowrap; z-index:3;
   }
-  .horse .h-avatar{width:38px; height:38px; border-radius:50%; object-fit:cover; border:2.5px solid #fff; box-shadow:0 2px 8px rgba(0,0,0,.18); flex-shrink:0; background:var(--black);}
-  .horse .h-avatar.ph{color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;}
+  .horse .h-avatar{width:42px; height:42px; border-radius:50%; object-fit:cover; border:3px solid #fff; box-shadow:0 3px 10px rgba(0,0,0,.22); flex-shrink:0; background:var(--black);}
+  .horse .h-avatar.ph{color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px;}
   .horse .h-pos{
-    width:20px; height:20px; border-radius:50%; background:var(--black); color:#fff; font-size:10px; font-weight:800;
-    display:flex; align-items:center; justify-content:center; position:absolute; left:-6px; top:-6px; box-shadow:0 0 0 2px #fff;
+    width:21px; height:21px; border-radius:50%; background:var(--black); color:#fff; font-size:10.5px; font-weight:800;
+    display:flex; align-items:center; justify-content:center; position:absolute; left:-7px; top:-7px; box-shadow:0 0 0 2.5px #fff;
   }
-  .horse.rank1 .h-pos{background:#D9A400;}
+  .horse.rank1 .h-pos{background:var(--gold);}
   .horse.rank2 .h-pos{background:#9AA0A6;}
   .horse.rank3 .h-pos{background:#C98A4B;}
-  .horse-tooltip{background:#fff; border:1px solid var(--gray-200); border-radius:10px; padding:5px 10px; font-size:11px; font-weight:700; box-shadow:var(--shadow); display:none;}
-  .lane:hover .horse-tooltip{display:block;}
-  .finish-flag{position:absolute; right:-40px; top:50%; transform:translateY(-50%); font-size:20px;}
-  .lane.unqualified{opacity:.55;}
-  .lane.unqualified .lane-fill{background:var(--gray-200) !important;}
+  .h-tag{
+    background:#fff; border:1.5px solid var(--gray-200); border-radius:100px; padding:4px 10px 4px 4px;
+    display:flex; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(0,0,0,.08);
+  }
+  .h-tag .h-name{font-size:11.5px; font-weight:800;}
+  .h-tag .h-val{font-size:10px; font-weight:700; color:var(--gray-500);}
+  .finish-flag-end{text-align:right; margin-top:10px; font-size:20px;}
+  .lane.rank1{background:var(--gold-bg);}
 
   /* podium */
-  .podium{display:flex; align-items:flex-end; justify-content:center; gap:16px; margin:8px 0 28px 0; padding:20px 0 0 0;}
+  .podium-wrap{padding:30px 24px 22px 24px; background:linear-gradient(180deg,#FAFAFB,#fff);}
+  .podium{display:flex; align-items:flex-end; justify-content:center; gap:14px;}
   .pod-slot{display:flex; flex-direction:column; align-items:center; width:150px;}
   .pod-slot img, .pod-slot .ph{border-radius:50%; object-fit:cover;}
-  .pod-slot.p1 img, .pod-slot.p1 .ph{width:76px; height:76px; border:3px solid var(--gold);}
-  .pod-slot.p2 img, .pod-slot.p2 .ph{width:60px; height:60px; border:3px solid var(--gray-400);}
-  .pod-slot.p3 img, .pod-slot.p3 .ph{width:60px; height:60px; border:3px solid #C98A4B;}
+  .pod-slot.p1 img, .pod-slot.p1 .ph{width:80px; height:80px; border:3.5px solid var(--gold);}
+  .pod-slot.p2 img, .pod-slot.p2 .ph{width:62px; height:62px; border:3px solid #ADB0B8;}
+  .pod-slot.p3 img, .pod-slot.p3 .ph{width:62px; height:62px; border:3px solid #C98A4B;}
   .pod-slot .ph{background:var(--black); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800;}
-  .pod-slot .pod-medal{font-size:20px; margin-top:6px;}
-  .pod-slot .pod-name{font-weight:800; font-size:14px; margin-top:4px;}
-  .pod-slot .pod-val{font-size:16px; font-weight:800; margin-top:6px; color:var(--red);}
-  .pod-slot .pod-prize{font-size:11px; color:var(--gray-500); font-weight:700;}
-  .pod-base{background:var(--gray-50); border-radius:12px 12px 0 0; width:100%; margin-top:10px;}
-  .pod-slot.p1 .pod-base{height:64px;}
-  .pod-slot.p2 .pod-base{height:44px;}
-  .pod-slot.p3 .pod-base{height:32px;}
+  .pod-slot .pod-medal{font-size:22px; margin-top:8px;}
+  .pod-slot .pod-name{font-weight:800; font-size:14.5px; margin-top:2px; text-align:center;}
+  .pod-slot .pod-val{font-size:16px; font-weight:900; margin-top:6px; color:var(--red);}
+  .pod-slot .pod-prize{font-size:11px; color:var(--gray-500); font-weight:700; margin-top:2px;}
+  .pod-base{border-radius:12px 12px 0 0; width:100%; margin-top:12px; display:flex; align-items:flex-start; justify-content:center; padding-top:8px; font-weight:900; font-size:13px; color:#fff;}
+  .pod-slot.p1 .pod-base{height:72px; background:linear-gradient(180deg,#E8B800,#C99400);}
+  .pod-slot.p2 .pod-base{height:50px; background:linear-gradient(180deg,#C2C4CB,#9AA0A6);}
+  .pod-slot.p3 .pod-base{height:36px; background:linear-gradient(180deg,#D89B62,#C07C3C);}
 
   .rank-list{display:flex; flex-direction:column; gap:8px;}
-  .rank-row{display:flex; align-items:center; gap:14px; background:#fff; border:1px solid var(--gray-200); border-radius:14px; padding:12px 18px;}
-  .rank-row.unq{opacity:.55;}
-  .rank-row .r-pos{font-size:14px; font-weight:800; color:var(--gray-400); width:24px; text-align:center; flex-shrink:0;}
-  .rank-row img, .rank-row .ph{width:36px; height:36px; border-radius:50%; object-fit:cover; flex-shrink:0;}
-  .rank-row .ph{background:var(--black); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:12px;}
-  .rank-row .r-info{flex-shrink:0; width:120px;}
+  .rank-row{display:flex; align-items:center; gap:14px; background:#fff; border:1px solid var(--gray-200); border-radius:14px; padding:12px 18px; transition:border-color .15s;}
+  .rank-row.qual{border-color:#F5D0CE;}
+  .rank-row .r-pos{font-size:15px; font-weight:900; color:var(--gray-400); width:26px; text-align:center; flex-shrink:0;}
+  .rank-row.rk1 .r-pos{color:var(--gold);}
+  .rank-row.rk2 .r-pos{color:#9AA0A6;}
+  .rank-row.rk3 .r-pos{color:#C98A4B;}
+  .rank-row img, .rank-row .ph{width:38px; height:38px; border-radius:50%; object-fit:cover; flex-shrink:0;}
+  .rank-row .ph{background:var(--black); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px;}
+  .rank-row .r-info{flex-shrink:0; width:130px;}
   .rank-row .r-name{font-weight:800; font-size:14px;}
-  .rank-row .r-tag{font-size:11px; color:var(--gray-500); font-weight:700;}
+  .r-tag{font-size:10.5px; font-weight:800; padding:2px 8px; border-radius:100px; display:inline-block; margin-top:2px;}
+  .r-tag.on{background:var(--green-bg); color:var(--green);}
+  .r-tag.off{background:var(--amber-bg); color:var(--amber);}
   .rank-row .r-bar{flex:1;}
-  .rank-row .r-val{width:80px; text-align:right; font-weight:800; font-size:14px; flex-shrink:0;}
+  .rank-row .r-val{width:110px; text-align:right; font-weight:800; font-size:14px; flex-shrink:0;}
+
+  .empty-race{background:var(--gray-50); border:1.5px dashed var(--gray-200); border-radius:16px; padding:26px; text-align:center; width:100%;}
+  .empty-race .e-title{font-weight:800; font-size:14px;}
+  .empty-race .e-sub{font-size:12px; color:var(--gray-500); font-weight:600; margin-top:4px;}
 
   .empty-card{
     background:var(--gray-50); border:1.5px dashed var(--gray-200); border-radius:var(--radius);
@@ -235,7 +266,7 @@
   .page.active{display:block;}
 
   footer.brand-foot{margin-top:40px; padding-top:20px; border-top:1px solid var(--gray-200); display:flex; align-items:center; gap:10px;}
-  footer.brand-foot img{width:20px; height:20px; border-radius:5px; object-fit:cover;}
+  footer.brand-foot img{height:18px; width:auto; border-radius:4px;}
   footer.brand-foot span{font-size:11px; color:var(--gray-400); font-weight:700;}
 
   /* Mobile */
@@ -244,70 +275,66 @@
   @media (max-width:860px){
     .sidebar{display:none;}
     .mobile-topbar{
-      display:flex; align-items:center; justify-content:space-between; padding:16px 18px;
+      display:flex; align-items:center; padding:14px 18px;
       border-bottom:1px solid var(--gray-200); position:sticky; top:0; background:#fff; z-index:40;
     }
-    .mobile-topbar .mt-logo{display:flex; align-items:center; gap:8px;}
-    .mobile-topbar .mt-logo img{width:28px; height:28px; border-radius:7px;}
-    .mobile-topbar .mt-logo b{font-size:14px; font-weight:800;}
+    .mobile-topbar img{height:24px; width:auto; border-radius:5px;}
     .bottom-nav{
       display:flex; position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid var(--gray-200);
-      z-index:40; padding:8px 10px calc(8px + env(safe-area-inset-bottom)) 10px;
+      z-index:40; padding:8px 6px calc(8px + env(safe-area-inset-bottom)) 6px;
     }
-    .bottom-nav button{flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; background:none; border:none; color:var(--gray-500); font-size:10px; font-weight:700; padding:6px 0;}
-    .bottom-nav button svg{width:20px; height:20px;}
+    .bottom-nav button{flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; background:none; border:none; color:var(--gray-500); font-size:9.5px; font-weight:700; padding:6px 0;}
+    .bottom-nav button svg{width:19px; height:19px;}
     .bottom-nav button.active{color:var(--red);}
     .main{padding-bottom:70px;}
-    .topbar{padding:18px 18px 0 18px; flex-wrap:wrap;}
+    .topbar{padding:18px 18px 0 18px;}
     .content{padding:16px 18px 50px 18px;}
     .grid-2{grid-template-columns:1fr;}
     .hero{flex-direction:column; align-items:flex-start; gap:14px; padding:20px;}
     .podium{gap:8px;}
     .pod-slot{width:auto; flex:1;}
-    .track-wrap{padding-right:40px;}
-    .horse .h-avatar{width:30px; height:30px;}
-    .lane{height:40px;}
-    .rank-row .r-info{width:90px;}
-    #vendorSelectDesktop{display:none;}
+    .track-wrap{padding-right:0;}
+    .horse .h-avatar{width:34px; height:34px;}
+    .h-tag .h-name{font-size:10.5px;}
+    .lane{height:46px;}
+    .rank-row{flex-wrap:wrap;}
+    .rank-row .r-info{width:auto;}
+    .rank-row .r-bar{order:5; flex-basis:100%; margin-top:6px;}
+    .vp-grid{grid-template-columns:repeat(2,1fr);}
   }
 </style>
 </head>
 <body>
-<div class="mobile-topbar">
-  <div class="mt-logo"><img src="" id="mtLogo" alt="Moutinho"><b>Moutinho</b></div>
-  <div id="mobileVendorSelect"></div>
-</div>
+<div class="mobile-topbar"><img src="" id="mtLogo" alt="Moutinho"></div>
 
 <div class="app">
   <aside class="sidebar">
-    <div class="sidebar-logo">
-      <img src="" id="sbLogo" alt="Moutinho">
-      <div><div class="lg-name">Moutinho</div><div class="lg-sub">Materiais</div></div>
-    </div>
-    <div class="campaign-tag">🏆 Campanha Amanco Wavin</div>
+    <div class="sidebar-logo"><img src="" id="sbLogo" alt="Moutinho"></div>
+    <div class="campaign-tag">🏆 Desafio Fechamento 2026</div>
     <nav class="nav">
-      <button class="nav-item active" data-page="inicio">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h4a1 1 0 001-1v-4h2v4a1 1 0 001 1h4a1 1 0 001-1V10"/></svg>
-        Início
+      <button class="nav-item active" data-page="geral">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 15l4-5 3 3 5-7"/></svg>
+        Geral da Campanha
       </button>
       <button class="nav-item" data-page="ranking">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 01-10 0V4zM7 6H4a2 2 0 002 2M17 6h3a2 2 0 01-2 2"/></svg>
-        Ranking
+        Ranking Geral
+      </button>
+      <button class="nav-item" data-page="vendedor">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        Por Vendedor
       </button>
     </nav>
     <div class="sidebar-foot">
-      <div class="f-name">Desafio Fechamento 2026</div>
+      <div class="f-name">Campanha Amanco Wavin</div>
       <div class="f-sub">01/09 a 30/11/2026</div>
     </div>
   </aside>
 
   <main class="main">
     <div class="topbar">
-      <div>
-        <h1 id="pageTitle">Início</h1>
-        <div class="sub" id="pageSub">Seu acompanhamento da Campanha Amanco Wavin</div>
-      </div>
-      <div class="vendor-select" id="vendorSelectDesktop"></div>
+      <h1 id="pageTitle">Geral da Campanha</h1>
+      <div class="sub" id="pageSub">Como a equipe Moutinho está indo na campanha Amanco Wavin</div>
     </div>
 
     <div class="content">
@@ -321,89 +348,142 @@
 
       <div id="appContent" style="display:none">
 
-        <!-- ============ INÍCIO ============ -->
-        <section class="page active" id="page-inicio">
-          <div class="card hero">
-            <img id="heroAvatar" src="" style="display:none">
-            <div class="ph" id="heroPh" style="display:none"></div>
-            <div class="hero-mid">
-              <div class="hgreet">Olá, <span id="heroName">—</span></div>
-              <div class="hsub" id="heroSub">Acompanhe seus dois desafios da campanha Amanco Wavin</div>
-            </div>
-          </div>
-
-          <div class="section-label">Seus desafios</div>
-          <div class="grid grid-2">
-            <div class="card challenge-card">
-              <div class="ch-top">
-                <div class="ch-tag">
-                  <div class="ch-ic" style="background:var(--green-bg)">📈</div>
-                  <div><div class="ch-title">Desafio 1 — Vendas</div><div class="ch-desc">Maior volume Amanco Wavin</div></div>
-                </div>
-                <div class="ch-badge" id="d1Badge">—</div>
-              </div>
-              <div class="ch-val" id="d1Val">R$ 0</div>
-              <div class="ch-target" id="d1Target">Meta de participação: R$ 0</div>
-              <div class="bar-track"><div class="bar-fill" id="d1Bar" style="background:var(--green)"></div></div>
-              <div class="ch-foot"><span id="d1FootLeft">—</span><span id="d1FootRight">—</span></div>
-            </div>
-            <div class="card challenge-card">
-              <div class="ch-top">
-                <div class="ch-tag">
-                  <div class="ch-ic" style="background:var(--blue-bg)">🎯</div>
-                  <div><div class="ch-title">Desafio 2 — Margem</div><div class="ch-desc">Melhor margem de venda</div></div>
-                </div>
-                <div class="ch-badge" id="d2Badge">—</div>
-              </div>
-              <div class="ch-val" id="d2Val">0%</div>
-              <div class="ch-target" id="d2Target">Margem mínima exigida: 0%</div>
-              <div class="bar-track"><div class="bar-fill" id="d2Bar" style="background:var(--blue)"></div></div>
-              <div class="ch-foot"><span id="d2FootLeft">—</span><span id="d2FootRight">—</span></div>
-            </div>
-          </div>
-
-          <div class="section-label">Ritmo da equipe</div>
+        <!-- ============ GERAL DA CAMPANHA ============ -->
+        <section class="page active" id="page-geral">
+          <div class="section-label">🚀 Ritmo da equipe</div>
           <div class="card pulse-card">
             <div class="pulse-top">
-              <div class="pulse-title">🚀 Meta geral da campanha</div>
+              <div class="pulse-title">Meta geral da campanha</div>
               <div class="pulse-val" id="pulsePct">0%</div>
             </div>
             <div class="bar-track"><div class="bar-fill" id="pulseBar" style="background:var(--red)"></div></div>
-            <div class="ch-foot"><span id="pulseFootLeft">—</span><span id="pulseFootRight">Meta: R$ 0</span></div>
+            <div class="ch-foot"><span id="pulseFootLeft">—</span><span id="pulseFootRight">Meta: R$ 0,00</span></div>
             <div class="pulse-days">📅 <span id="daysLeft">—</span></div>
-            <div class="hmsg" id="motivMsg">Carregando seu progresso...</div>
+            <div class="hmsg" id="motivMsg">Carregando o progresso da equipe...</div>
+          </div>
+
+          <div class="section-label">Resumo dos desafios</div>
+          <div class="grid grid-2">
+            <div class="card mini-card">
+              <div class="mini-top">
+                <div class="ch-ic" style="background:var(--green-bg)">📈</div>
+                <div><div class="ch-title" id="d1MiniTitle">Desafio 1</div><div class="ch-desc">Maior Volume de Vendas</div></div>
+              </div>
+              <div class="mini-stat" id="d1MiniCount">0 de 0</div>
+              <div class="mini-lbl">vendedores já na disputa</div>
+              <div class="mini-leader" id="d1MiniLeader"></div>
+            </div>
+            <div class="card mini-card">
+              <div class="mini-top">
+                <div class="ch-ic" style="background:var(--blue-bg)">🎯</div>
+                <div><div class="ch-title" id="d2MiniTitle">Desafio 2</div><div class="ch-desc">Melhor Margem de Venda</div></div>
+              </div>
+              <div class="mini-stat" id="d2MiniCount">0 de 0</div>
+              <div class="mini-lbl">vendedores já na disputa</div>
+              <div class="mini-leader" id="d2MiniLeader"></div>
+            </div>
+          </div>
+
+          <div class="section-label">🍕 Meta geral & rodízio</div>
+          <div class="card pizza-card" id="pizzaCard">
+            <div class="pizza-ic">🍕</div>
+            <div><div class="pizza-title" id="pizzaTitle">Carregando...</div><div class="pizza-sub" id="pizzaSub"></div></div>
           </div>
         </section>
 
-        <!-- ============ RANKING ============ -->
+        <!-- ============ RANKING GERAL ============ -->
         <section class="page" id="page-ranking">
           <div class="tabs">
-            <button class="tab active" data-tab="d1">Desafio 1 — Vendas</button>
-            <button class="tab" data-tab="d2">Desafio 2 — Margem</button>
+            <button class="tab active" data-tab="d1">Desafio 1 · Maior Volume de Vendas</button>
+            <button class="tab" data-tab="d2">Desafio 2 · Melhor Margem de Venda</button>
           </div>
 
           <div id="tab-d1">
-            <div class="card race-card">
-              <div class="race-head"><div class="race-title">🐎 Corrida da Campanha — Volume de Vendas</div></div>
-              <div class="race-sub">A linha tracejada marca o gatilho de participação (R$ 300 mil). Passe o mouse sobre um cavalo para ver o valor.</div>
-              <div class="track-wrap" id="raceD1"></div>
-            </div>
-            <div class="section-label">Pódio</div>
-            <div class="podium" id="podiumD1"></div>
             <div class="section-label">Classificação completa</div>
             <div class="rank-list" id="rankListD1"></div>
+
+            <div class="section-label">🏆 Pódio</div>
+            <div class="card podium-wrap"><div class="podium" id="podiumD1"></div></div>
+
+            <div class="section-label">🐎 Corrida da campanha</div>
+            <div class="card race-card">
+              <div class="race-title">Volume de Vendas Amanco Wavin</div>
+              <div class="race-sub">A linha vermelha marca o gatilho de participação. Quem passa dela entra oficialmente na disputa pelo pódio.</div>
+              <div class="track-wrap" id="raceD1"></div>
+              <div class="finish-flag-end">🏁</div>
+            </div>
           </div>
 
           <div id="tab-d2" style="display:none">
-            <div class="card race-card">
-              <div class="race-head"><div class="race-title">🐎 Corrida da Campanha — Margem de Venda</div></div>
-              <div class="race-sub">A linha tracejada marca a margem mínima exigida (25%). Passe o mouse sobre um cavalo para ver o valor.</div>
-              <div class="track-wrap" id="raceD2"></div>
-            </div>
-            <div class="section-label">Pódio</div>
-            <div class="podium" id="podiumD2"></div>
             <div class="section-label">Classificação completa</div>
             <div class="rank-list" id="rankListD2"></div>
+
+            <div class="section-label">🏆 Pódio</div>
+            <div class="card podium-wrap"><div class="podium" id="podiumD2"></div></div>
+
+            <div class="section-label">🐎 Corrida da campanha</div>
+            <div class="card race-card">
+              <div class="race-title">Margem de Venda Amanco Wavin</div>
+              <div class="race-sub">A linha vermelha marca a margem mínima exigida. Quem passa dela entra oficialmente na disputa pelo pódio.</div>
+              <div class="track-wrap" id="raceD2"></div>
+              <div class="finish-flag-end">🏁</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ POR VENDEDOR ============ -->
+        <section class="page" id="page-vendedor">
+          <div class="card" id="vendorPicker">
+            <div class="vp-title">Selecione um vendedor</div>
+            <div class="vp-sub">Escolha quem você quer acompanhar</div>
+            <div class="vp-grid" id="vendorPickerGrid"></div>
+          </div>
+
+          <div id="vendorDetail" style="display:none">
+            <div class="card hero">
+              <div class="hero-l">
+                <img id="heroAvatar" src="" style="display:none">
+                <div class="ph" id="heroPh" style="display:none"></div>
+                <div class="hero-mid">
+                  <div class="hgreet">Olá, <span id="heroName">—</span></div>
+                  <div class="hsub">Acompanhe seus dois desafios da campanha Amanco Wavin</div>
+                </div>
+              </div>
+              <button class="switch-btn" id="switchVendorBtn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>
+                Trocar vendedor
+              </button>
+            </div>
+
+            <div class="section-label">Seus desafios</div>
+            <div class="grid grid-2">
+              <div class="card challenge-card">
+                <div class="ch-top">
+                  <div class="ch-tag">
+                    <div class="ch-ic" style="background:var(--green-bg)">📈</div>
+                    <div><div class="ch-title">Desafio 1</div><div class="ch-desc">Maior Volume de Vendas</div></div>
+                  </div>
+                  <div class="ch-badge" id="d1Badge">—</div>
+                </div>
+                <div class="ch-val" id="d1Val">R$ 0,00</div>
+                <div class="ch-target" id="d1Target">Gatilho de participação: R$ 0,00</div>
+                <div class="bar-track"><div class="bar-fill" id="d1Bar" style="background:var(--green)"></div></div>
+                <div class="ch-foot"><span id="d1FootLeft">—</span><span id="d1FootRight">—</span></div>
+              </div>
+              <div class="card challenge-card">
+                <div class="ch-top">
+                  <div class="ch-tag">
+                    <div class="ch-ic" style="background:var(--blue-bg)">🎯</div>
+                    <div><div class="ch-title">Desafio 2</div><div class="ch-desc">Melhor Margem de Venda</div></div>
+                  </div>
+                  <div class="ch-badge" id="d2Badge">—</div>
+                </div>
+                <div class="ch-val" id="d2Val">0,00%</div>
+                <div class="ch-target" id="d2Target">Margem mínima exigida: 0,00%</div>
+                <div class="bar-track"><div class="bar-fill" id="d2Bar" style="background:var(--blue)"></div></div>
+                <div class="ch-foot"><span id="d2FootLeft">—</span><span id="d2FootRight">—</span></div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -418,13 +498,17 @@
 </div>
 
 <div class="bottom-nav">
-  <button class="active" data-page="inicio">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h4a1 1 0 001-1v-4h2v4a1 1 0 001 1h4a1 1 0 001-1V10"/></svg>
-    Início
+  <button class="active" data-page="geral">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 15l4-5 3 3 5-7"/></svg>
+    Geral
   </button>
   <button data-page="ranking">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 01-10 0V4zM7 6H4a2 2 0 002 2M17 6h3a2 2 0 01-2 2"/></svg>
     Ranking
+  </button>
+  <button data-page="vendedor">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+    Vendedor
   </button>
 </div>
 
@@ -435,15 +519,12 @@ const IMAGES = {"bruno": "data:image/png;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAAR
 /* ====================== CSV SOURCES ====================== */
 const CSV_URLS = {
   config: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgosoppnWiXhQdAoFze55Tnzh8KNwGQnVHdleR7VPGOMzBEhasoMsuK27ycpz80mXj01lHuW5Xa9zl/pub?gid=1009682803&single=true&output=csv",
-  set:    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgosoppnWiXhQdAoFze55Tnzh8KNwGQnVHdleR7VPGOMzBEhasoMsuK27ycpz80mXj01lHuW5Xa9zl/pub?gid=1006071995&single=true&output=csv",
-  out:    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgosoppnWiXhQdAoFze55Tnzh8KNwGQnVHdleR7VPGOMzBEhasoMsuK27ycpz80mXj01lHuW5Xa9zl/pub?gid=490234455&single=true&output=csv",
-  nov:    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgosoppnWiXhQdAoFze55Tnzh8KNwGQnVHdleR7VPGOMzBEhasoMsuK27ycpz80mXj01lHuW5Xa9zl/pub?gid=1700258325&single=true&output=csv",
   resumo: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgosoppnWiXhQdAoFze55Tnzh8KNwGQnVHdleR7VPGOMzBEhasoMsuK27ycpz80mXj01lHuW5Xa9zl/pub?gid=835709090&single=true&output=csv",
 };
 const CAMPAIGN_END = new Date(2026, 10, 30, 23, 59, 59); // 30/11/2026
 const VENDOR_KEYS = { bruno:"bruno", eduardo:"eduardo", elton:"elton", geraldo:"geraldo", jeferson:"jeferson", jessica:"jessica", jéssica:"jessica", lisiane:"lisiane", sacha:"sacha" };
 
-/* ====================== CSV parsing (tested) ====================== */
+/* ====================== CSV parsing ====================== */
 function parseCSV(text) {
   const rows = [];
   let row = [], field = '', inQuotes = false;
@@ -554,7 +635,7 @@ function parseMetaGeral(rows) {
   return out;
 }
 
-/* ====================== Fetch (3-tier, 8s timeout) ====================== */
+/* ====================== Fetch (3-tier, timeout) ====================== */
 async function fetchWithTimeout(url, ms) {
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), ms);
@@ -567,9 +648,9 @@ async function fetchWithTimeout(url, ms) {
 }
 async function fetchCSVResilient(url) {
   const attempts = [
-    () => fetchWithTimeout(url, 8000),
-    () => fetchWithTimeout('https://corsproxy.io/?' + encodeURIComponent(url), 8000),
-    () => fetchWithTimeout('https://api.allorigins.win/raw?url=' + encodeURIComponent(url), 8000),
+    () => fetchWithTimeout(url, 10000),
+    () => fetchWithTimeout('https://corsproxy.io/?' + encodeURIComponent(url), 10000),
+    () => fetchWithTimeout('https://api.allorigins.win/raw?url=' + encodeURIComponent(url), 10000),
   ];
   let lastErr;
   for (const attempt of attempts) {
@@ -580,15 +661,14 @@ async function fetchCSVResilient(url) {
 
 /* ====================== State ====================== */
 let STATE = { vendors: [], config: null, meta: null, selected: null };
-let currentPage = 'inicio';
 
-function fmtBRL(v) { return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }); }
-function fmtPct(v, dec) { return (v * 100).toLocaleString('pt-BR', { minimumFractionDigits: dec ?? 1, maximumFractionDigits: dec ?? 1 }) + '%'; }
+function fmtBRL(v) { return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function fmtPct(v) { return (v * 100).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%'; }
 function slug(nome) { const n = nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); return VENDOR_KEYS[n] || n; }
-function avatarHTML(nome, size) {
+function avatarInnerHTML(nome, cls) {
   const key = slug(nome);
-  if (IMAGES[key]) return `<img src="${IMAGES[key]}" style="width:${size}px;height:${size}px">`;
-  return `<div class="ph" style="width:${size}px;height:${size}px">${nome.charAt(0)}</div>`;
+  if (IMAGES[key]) return `<img class="${cls}" src="${IMAGES[key]}">`;
+  return `<div class="${cls} ph">${nome.charAt(0)}</div>`;
 }
 
 /* ====================== Load ====================== */
@@ -604,16 +684,15 @@ async function loadAll() {
       config = parseConfig(parseCSV(configTxt));
     } catch (e) {
       console.warn('Configuração indisponível, usando parâmetros padrão da campanha.', e);
-      config = parseConfig([]); // falls back to built-in defaults
+      config = parseConfig([]);
     }
     const resumoRows = parseCSV(resumoTxt);
     const { vendors } = parseVendorTable(resumoRows);
     const meta = parseMetaGeral(resumoRows);
     if (!vendors.length) throw new Error('Nenhum vendedor encontrado na planilha.');
-    STATE = { vendors, config, meta, selected: STATE.selected || vendors[0].nome };
+    STATE = { vendors, config, meta, selected: null };
     document.getElementById('loadState').style.display = 'none';
     document.getElementById('appContent').style.display = 'block';
-    buildVendorSelectors();
     renderAll();
   } catch (e) {
     console.error(e);
@@ -623,167 +702,210 @@ async function loadAll() {
   }
 }
 
-/* ====================== Vendor selector ====================== */
-function buildVendorSelectors() {
-  const build = (container) => {
-    container.innerHTML = `
-      <button class="vendor-btn" id="vBtn_${container.id}">
-        ${avatarHTML(STATE.selected, 30)}
-        <span id="vName_${container.id}">${STATE.selected}</span>
-        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-      <div class="vendor-menu" id="vMenu_${container.id}">
-        ${STATE.vendors.map(v => `<button class="vm-item" data-name="${v.nome}">${avatarHTML(v.nome, 26)}<span>${v.nome}</span></button>`).join('')}
-      </div>`;
-    const btn = container.querySelector('.vendor-btn');
-    const menu = container.querySelector('.vendor-menu');
-    btn.onclick = () => menu.classList.toggle('open');
-    menu.querySelectorAll('.vm-item').forEach(item => {
-      item.onclick = () => { STATE.selected = item.dataset.name; menu.classList.remove('open'); buildVendorSelectors(); renderAll(); };
-    });
-  };
-  build(document.getElementById('vendorSelectDesktop'));
-  const mobileC = document.getElementById('mobileVendorSelect');
-  mobileC.id = 'mobileVendorSelect';
-  build(mobileC);
-  document.addEventListener('click', (e) => {
-    document.querySelectorAll('.vendor-menu.open').forEach(m => { if (!m.parentElement.contains(e.target)) m.classList.remove('open'); });
-  }, { once: true });
-}
-
-/* ====================== Render: Início ====================== */
-function motivMessage(v, cfg, meta) {
-  const msgs = [];
-  if (v.qualD1 && v.rankD1 && v.rankD1 <= 3) msgs.push(`Você está no pódio do Desafio 1! Continue vendendo para manter a posição.`);
-  else if (!v.qualD1) msgs.push(`Faltam ${fmtBRL(Math.max(cfg.gatilhoD1 - v.vendas, 0))} para você entrar no Desafio 1.`);
-  if (v.qualD2 && v.rankD2 && v.rankD2 <= 3) msgs.push(`E você também está no pódio da Margem — excelente trabalho!`);
-  else if (v.qualD1 && !v.qualD2 && v.vendas >= cfg.gatilhoD2) msgs.push(`Sua margem está em ${fmtPct(v.margem)} — chegue a ${fmtPct(cfg.margemMin, 0)} para entrar no Desafio 2.`);
-  if (!msgs.length) msgs.push('Continue vendendo linha Amanco Wavin para avançar nos dois desafios!');
-  return msgs.join(' ');
-}
-function renderInicio() {
-  const v = STATE.vendors.find(x => x.nome === STATE.selected) || STATE.vendors[0];
-  const cfg = STATE.config, meta = STATE.meta;
-  const heroImg = document.getElementById('heroAvatar'), heroPh = document.getElementById('heroPh');
-  const key = slug(v.nome);
-  if (IMAGES[key]) { heroImg.src = IMAGES[key]; heroImg.style.display = 'block'; heroPh.style.display = 'none'; }
-  else { heroPh.textContent = v.nome.charAt(0); heroPh.style.display = 'flex'; heroImg.style.display = 'none'; }
-  document.getElementById('heroName').textContent = v.nome;
-
-  // Desafio 1
-  const d1pct = Math.min(v.vendas / cfg.gatilhoD1, 1);
-  document.getElementById('d1Val').textContent = fmtBRL(v.vendas);
-  document.getElementById('d1Target').textContent = 'Gatilho de participação: ' + fmtBRL(cfg.gatilhoD1);
-  document.getElementById('d1Bar').style.width = (d1pct * 100) + '%';
-  document.getElementById('d1FootLeft').textContent = v.qualD1 ? (v.rankD1 ? `${v.rankD1}º no ranking` : 'Qualificado') : fmtPct(v.pctMeta) + ' da meta';
-  document.getElementById('d1FootRight').textContent = v.qualD1 ? '✅ Participando' : `Faltam ${fmtBRL(Math.max(cfg.gatilhoD1 - v.vendas, 0))}`;
-  const d1b = document.getElementById('d1Badge');
-  d1b.textContent = v.qualD1 ? '✅ Qualificado' : '🔒 Ainda não';
-  d1b.style.background = v.qualD1 ? 'var(--green-bg)' : 'var(--gray-100)';
-  d1b.style.color = v.qualD1 ? 'var(--green)' : 'var(--gray-500)';
-
-  // Desafio 2
-  const d2pct = Math.min(v.margem / cfg.margemMin, 1);
-  document.getElementById('d2Val').textContent = fmtPct(v.margem);
-  document.getElementById('d2Target').textContent = 'Margem mínima exigida: ' + fmtPct(cfg.margemMin, 0) + ' (e vendas ≥ ' + fmtBRL(cfg.gatilhoD2) + ')';
-  document.getElementById('d2Bar').style.width = (d2pct * 100) + '%';
-  document.getElementById('d2FootLeft').textContent = v.qualD2 ? (v.rankD2 ? `${v.rankD2}º no ranking` : 'Qualificado') : 'Em andamento';
-  document.getElementById('d2FootRight').textContent = v.qualD2 ? '✅ Participando' : (v.vendas < cfg.gatilhoD2 ? `Faltam ${fmtBRL(Math.max(cfg.gatilhoD2 - v.vendas, 0))} em vendas` : 'Suba a margem');
-  const d2b = document.getElementById('d2Badge');
-  d2b.textContent = v.qualD2 ? '✅ Qualificado' : '🔒 Ainda não';
-  d2b.style.background = v.qualD2 ? 'var(--blue-bg)' : 'var(--gray-100)';
-  d2b.style.color = v.qualD2 ? 'var(--blue)' : 'var(--gray-500)';
-
-  // Team pulse
+/* ====================== Render: Geral da Campanha ====================== */
+function renderGeral() {
+  const cfg = STATE.config, meta = STATE.meta, vs = STATE.vendors;
   const pulsePct = Math.min(meta.pct, 1);
-  document.getElementById('pulsePct').textContent = fmtPct(meta.pct, 0);
+  document.getElementById('pulsePct').textContent = fmtPct(meta.pct);
   document.getElementById('pulseBar').style.width = (pulsePct * 100) + '%';
   document.getElementById('pulseFootLeft').textContent = fmtBRL(meta.totalVendido) + ' vendidos pela equipe';
   document.getElementById('pulseFootRight').textContent = 'Meta: ' + fmtBRL(meta.gatilho);
   const today = new Date();
   const diffDays = Math.max(Math.ceil((CAMPAIGN_END - today) / 86400000), 0);
   document.getElementById('daysLeft').textContent = diffDays > 0 ? `${diffDays} dias restantes até 30/11/2026` : 'Campanha encerrada';
-  document.getElementById('motivMsg').textContent = (meta.batida ? '🍕 Meta geral batida! ' : '') + motivMessage(v, cfg, meta);
+  document.getElementById('motivMsg').textContent = meta.batida
+    ? '🎉 Meta geral batida! A equipe está arrasando na campanha Amanco Wavin.'
+    : 'Continue vendendo linha Amanco Wavin — cada venda aproxima a equipe da meta geral!';
+
+  const qualD1 = vs.filter(v => v.qualD1).length, qualD2 = vs.filter(v => v.qualD2).length;
+  document.getElementById('d1MiniCount').textContent = `${qualD1} de ${vs.length}`;
+  document.getElementById('d2MiniCount').textContent = `${qualD2} de ${vs.length}`;
+  const leaderD1 = vs.find(v => v.rankD1 === 1), leaderD2 = vs.find(v => v.rankD2 === 1);
+  const leaderHTML = (v, valStr) => v
+    ? `${avatarInnerHTML(v.nome, 'ml-av')}<div><div class="ml-name">🥇 ${v.nome}</div><div class="ml-val">${valStr}</div></div>`
+    : `<div class="ml-name" style="color:var(--gray-500)">Ainda sem líder — a corrida está começando</div>`;
+  document.getElementById('d1MiniLeader').innerHTML = leaderHTML(leaderD1, leaderD1 ? fmtBRL(leaderD1.vendas) : '');
+  document.getElementById('d2MiniLeader').innerHTML = leaderHTML(leaderD2, leaderD2 ? fmtPct(leaderD2.margem) : '');
+  document.querySelectorAll('#d1MiniLeader img, #d1MiniLeader .ph, #d2MiniLeader img, #d2MiniLeader .ph').forEach(el => {
+    el.style.width = '32px'; el.style.height = '32px'; el.style.borderRadius = '50%'; el.style.objectFit = 'cover';
+  });
+
+  const pizzaCard = document.getElementById('pizzaCard');
+  if (meta.batida) {
+    pizzaCard.classList.add('won');
+    document.getElementById('pizzaTitle').textContent = '🎉 Meta geral batida — rodízio de pizza garantido!';
+    document.getElementById('pizzaSub').textContent = 'A equipe de apoio comercial já garantiu a recompensa da campanha.';
+  } else {
+    pizzaCard.classList.remove('won');
+    const falta = Math.max(meta.gatilho - meta.totalVendido, 0);
+    document.getElementById('pizzaTitle').textContent = 'Ao bater a meta geral, rola rodízio de pizza pra equipe de apoio 🍕';
+    document.getElementById('pizzaSub').textContent = `Faltam ${fmtBRL(falta)} em vendas da equipe para liberar.`;
+  }
 }
 
-/* ====================== Render: Ranking (horse race) ====================== */
+/* ====================== Render: Ranking Geral ====================== */
 function renderRace(containerId, vendors, valueKey, qualKey, rankKey, scaleMax, gatilho, fmt) {
   const el = document.getElementById(containerId);
   const sorted = [...vendors].sort((a, b) => b[valueKey] - a[valueKey]);
   const gatilhoPct = Math.min(gatilho / scaleMax, 1) * 100;
-  let html = `<div class="track-gatilho" style="left:${gatilhoPct}%"><div class="tg-label">Gatilho</div></div>`;
+  let html = `<div class="track-gatilho" style="left:${gatilhoPct}%"><div class="tg-label">GATILHO</div></div>`;
   sorted.forEach(v => {
     const pct = Math.min(Math.max(v[valueKey] / scaleMax, 0), 1) * 100;
     const rank = v[rankKey];
     const rankClass = rank === 1 ? 'rank1' : rank === 2 ? 'rank2' : rank === 3 ? 'rank3' : '';
-    const key = slug(v.nome);
-    const avatarInner = IMAGES[key] ? `<img class="h-avatar" src="${IMAGES[key]}">` : `<div class="h-avatar ph">${v.nome.charAt(0)}</div>`;
-    html += `<div class="lane ${v[qualKey] ? '' : 'unqualified'}">
-      <div class="lane-fill ${rank === 1 ? 'top1' : ''}" style="width:${pct}%"></div>
+    const fillClass = rank === 1 ? 'top1' : rank === 2 ? 'top2' : rank === 3 ? 'top3' : (v[qualKey] ? 'qualified' : 'pending');
+    const laneClass = rank === 1 ? 'rank1' : '';
+    html += `<div class="lane ${laneClass}">
+      <div class="lane-fill ${fillClass}" style="width:${pct}%"></div>
       <div class="horse ${rankClass}" style="left:${pct}%">
-        <span style="position:relative">${avatarInner}${rank ? `<span class="h-pos">${rank}</span>` : ''}</span>
+        <span style="position:relative">${avatarInnerHTML(v.nome, 'h-avatar')}${rank ? `<span class="h-pos">${rank}</span>` : ''}</span>
+        <span class="h-tag"><span class="h-name">${v.nome}</span><span class="h-val">${fmt(v[valueKey])}</span></span>
       </div>
-      <div class="finish-flag" style="display:${pct > 96 ? 'none' : 'none'}"></div>
     </div>`;
   });
-  el.innerHTML = html + `<div class="finish-flag" style="position:static;text-align:right;margin-top:4px">🏁</div>`;
+  el.innerHTML = html;
 }
 function renderPodium(containerId, vendors, rankKey, valueKey, fmt, premios) {
   const el = document.getElementById(containerId);
   const top3 = [1, 2, 3].map(r => vendors.find(v => v[rankKey] === r));
-  if (!top3[0]) { el.innerHTML = `<div class="empty-card" style="width:100%"><div class="e-title">Ainda sem pódio</div><div class="e-sub">Nenhum vendedor atingiu o gatilho deste desafio.</div></div>`; return; }
+  if (!top3[0]) {
+    el.innerHTML = `<div class="empty-race"><div class="e-title">🏁 A corrida começou!</div><div class="e-sub">Ainda ninguém bateu o gatilho deste desafio — o pódio aparece assim que alguém entrar na disputa.</div></div>`;
+    return;
+  }
   const order = [top3[1], top3[0], top3[2]];
   const cls = ['p2', 'p1', 'p3'];
   const medals = ['🥈', '🥇', '🥉'];
+  const podLabels = ['2º', '1º', '3º'];
   el.innerHTML = order.map((v, i) => {
-    if (!v) return `<div class="pod-slot ${cls[i]}"></div>`;
+    if (!v) return `<div class="pod-slot ${cls[i]}"><div class="pod-base"></div></div>`;
     const rIdx = cls[i] === 'p1' ? 0 : cls[i] === 'p2' ? 1 : 2;
     return `<div class="pod-slot ${cls[i]}">
-      ${IMAGES[slug(v.nome)] ? `<img src="${IMAGES[slug(v.nome)]}">` : `<div class="ph">${v.nome.charAt(0)}</div>`}
+      ${avatarInnerHTML(v.nome, '')}
       <div class="pod-medal">${medals[i]}</div>
       <div class="pod-name">${v.nome}</div>
       <div class="pod-val">${fmt(v[valueKey])}</div>
       <div class="pod-prize">Prêmio: ${fmtBRL(premios[rIdx])}</div>
-      <div class="pod-base"></div>
+      <div class="pod-base">${podLabels[i]}</div>
     </div>`;
   }).join('');
 }
-function renderRankList(containerId, vendors, valueKey, qualKey, fmt) {
+function renderRankList(containerId, vendors, valueKey, qualKey, rankKey, fmt) {
   const el = document.getElementById(containerId);
   const sorted = [...vendors].sort((a, b) => b[valueKey] - a[valueKey]);
   const maxVal = Math.max(...sorted.map(v => v[valueKey]), 1);
-  el.innerHTML = sorted.map((v, i) => `
-    <div class="rank-row ${v[qualKey] ? '' : 'unq'}">
+  el.innerHTML = sorted.map((v, i) => {
+    const rk = v[rankKey];
+    const rkClass = rk === 1 ? 'rk1' : rk === 2 ? 'rk2' : rk === 3 ? 'rk3' : '';
+    return `
+    <div class="rank-row ${v[qualKey] ? 'qual' : ''} ${rkClass}">
       <div class="r-pos">${i + 1}º</div>
-      ${IMAGES[slug(v.nome)] ? `<img src="${IMAGES[slug(v.nome)]}">` : `<div class="ph">${v.nome.charAt(0)}</div>`}
-      <div class="r-info"><div class="r-name">${v.nome}</div><div class="r-tag">${v[qualKey] ? 'Qualificado' : 'Não qualificado'}</div></div>
-      <div class="r-bar"><div class="bar-track"><div class="bar-fill" style="width:${(v[valueKey] / maxVal * 100)}%;background:${v[qualKey] ? 'var(--red)' : 'var(--gray-200)'}"></div></div></div>
+      ${avatarInnerHTML(v.nome, '')}
+      <div class="r-info">
+        <div class="r-name">${v.nome}</div>
+        <span class="r-tag ${v[qualKey] ? 'on' : 'off'}">${v[qualKey] ? '✅ Na disputa' : '🚀 Em construção'}</span>
+      </div>
+      <div class="r-bar"><div class="bar-track"><div class="bar-fill" style="width:${(v[valueKey] / maxVal * 100)}%;background:${v[qualKey] ? 'var(--red)' : 'var(--orange)'}"></div></div></div>
       <div class="r-val">${fmt(v[valueKey])}</div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 function renderRanking() {
   const cfg = STATE.config, vs = STATE.vendors;
+  renderRankList('rankListD1', vs, 'vendas', 'qualD1', 'rankD1', fmtBRL);
+  renderPodium('podiumD1', vs, 'rankD1', 'vendas', fmtBRL, cfg.premioD1);
   const scaleD1 = Math.max(...vs.map(v => v.vendas), cfg.gatilhoD1) * 1.12;
   renderRace('raceD1', vs, 'vendas', 'qualD1', 'rankD1', scaleD1, cfg.gatilhoD1, fmtBRL);
-  renderPodium('podiumD1', vs, 'rankD1', 'vendas', fmtBRL, cfg.premioD1);
-  renderRankList('rankListD1', vs, 'vendas', 'qualD1', fmtBRL);
 
+  renderRankList('rankListD2', vs, 'margem', 'qualD2', 'rankD2', fmtPct);
+  renderPodium('podiumD2', vs, 'rankD2', 'margem', fmtPct, cfg.premioD2);
   const scaleD2 = Math.max(...vs.map(v => v.margem), cfg.margemMin) * 1.25;
-  renderRace('raceD2', vs, 'margem', 'qualD2', 'rankD2', scaleD2, cfg.margemMin, (x) => fmtPct(x));
-  renderPodium('podiumD2', vs, 'rankD2', 'margem', (x) => fmtPct(x), cfg.premioD2);
-  renderRankList('rankListD2', vs, 'margem', 'qualD2', (x) => fmtPct(x));
+  renderRace('raceD2', vs, 'margem', 'qualD2', 'rankD2', scaleD2, cfg.margemMin, fmtPct);
 }
 
-function renderAll() { renderInicio(); renderRanking(); }
+/* ====================== Render: Por Vendedor ====================== */
+function renderVendorPicker() {
+  const grid = document.getElementById('vendorPickerGrid');
+  grid.innerHTML = STATE.vendors.map(v => `
+    <button class="vp-card" data-name="${v.nome}">
+      ${avatarInnerHTML(v.nome, '')}
+      <div class="vp-name">${v.nome}</div>
+      <div class="vp-tags">
+        <span class="vp-dot" style="background:${v.qualD1 ? 'var(--green)' : 'var(--gray-200)'}" title="Desafio 1"></span>
+        <span class="vp-dot" style="background:${v.qualD2 ? 'var(--blue)' : 'var(--gray-200)'}" title="Desafio 2"></span>
+      </div>
+    </button>`).join('');
+  grid.querySelectorAll('.vp-card').forEach(btn => {
+    btn.onclick = () => { STATE.selected = btn.dataset.name; renderVendedorPage(); };
+  });
+}
+function motivMessage(v, cfg) {
+  const msgs = [];
+  if (v.qualD1 && v.rankD1 && v.rankD1 <= 3) msgs.push(`Você está no pódio do Desafio 1! Continue vendendo para manter a posição.`);
+  else if (!v.qualD1) msgs.push(`Faltam ${fmtBRL(Math.max(cfg.gatilhoD1 - v.vendas, 0))} para você entrar no Desafio 1.`);
+  if (v.qualD2 && v.rankD2 && v.rankD2 <= 3) msgs.push(`E você também está no pódio da Margem — excelente trabalho!`);
+  else if (v.qualD1 && !v.qualD2 && v.vendas >= cfg.gatilhoD2) msgs.push(`Sua margem está em ${fmtPct(v.margem)} — chegue a ${fmtPct(cfg.margemMin)} para entrar no Desafio 2.`);
+  if (!msgs.length) msgs.push('Continue vendendo linha Amanco Wavin para avançar nos dois desafios!');
+  return msgs.join(' ');
+}
+function renderVendedorPage() {
+  const picker = document.getElementById('vendorPicker');
+  const detail = document.getElementById('vendorDetail');
+  if (!STATE.selected) {
+    picker.style.display = 'block';
+    detail.style.display = 'none';
+    renderVendorPicker();
+    return;
+  }
+  picker.style.display = 'none';
+  detail.style.display = 'block';
+
+  const v = STATE.vendors.find(x => x.nome === STATE.selected);
+  const cfg = STATE.config;
+  const heroImg = document.getElementById('heroAvatar'), heroPh = document.getElementById('heroPh');
+  const key = slug(v.nome);
+  if (IMAGES[key]) { heroImg.src = IMAGES[key]; heroImg.style.display = 'block'; heroPh.style.display = 'none'; }
+  else { heroPh.textContent = v.nome.charAt(0); heroPh.style.display = 'flex'; heroImg.style.display = 'none'; }
+  document.getElementById('heroName').textContent = v.nome;
+
+  const d1pct = Math.min(v.vendas / cfg.gatilhoD1, 1);
+  document.getElementById('d1Val').textContent = fmtBRL(v.vendas);
+  document.getElementById('d1Target').textContent = 'Gatilho de participação: ' + fmtBRL(cfg.gatilhoD1);
+  document.getElementById('d1Bar').style.width = (d1pct * 100) + '%';
+  document.getElementById('d1FootLeft').textContent = v.qualD1 ? (v.rankD1 ? `${v.rankD1}º no ranking` : 'Qualificado') : fmtPct(v.pctMeta) + ' do gatilho';
+  document.getElementById('d1FootRight').textContent = v.qualD1 ? '✅ Na disputa' : `Faltam ${fmtBRL(Math.max(cfg.gatilhoD1 - v.vendas, 0))}`;
+  const d1b = document.getElementById('d1Badge');
+  d1b.textContent = v.qualD1 ? '✅ Na disputa' : '🚀 Em construção';
+  d1b.style.background = v.qualD1 ? 'var(--green-bg)' : 'var(--amber-bg)';
+  d1b.style.color = v.qualD1 ? 'var(--green)' : 'var(--amber)';
+
+  const d2pct = Math.min(v.margem / cfg.margemMin, 1);
+  document.getElementById('d2Val').textContent = fmtPct(v.margem);
+  document.getElementById('d2Target').textContent = 'Margem mínima exigida: ' + fmtPct(cfg.margemMin) + ' (e vendas ≥ ' + fmtBRL(cfg.gatilhoD2) + ')';
+  document.getElementById('d2Bar').style.width = (d2pct * 100) + '%';
+  document.getElementById('d2FootLeft').textContent = v.qualD2 ? (v.rankD2 ? `${v.rankD2}º no ranking` : 'Qualificado') : 'Em andamento';
+  document.getElementById('d2FootRight').textContent = v.qualD2 ? '✅ Na disputa' : (v.vendas < cfg.gatilhoD2 ? `Faltam ${fmtBRL(Math.max(cfg.gatilhoD2 - v.vendas, 0))} em vendas` : 'Suba a margem');
+  const d2b = document.getElementById('d2Badge');
+  d2b.textContent = v.qualD2 ? '✅ Na disputa' : '🚀 Em construção';
+  d2b.style.background = v.qualD2 ? 'var(--blue-bg)' : 'var(--amber-bg)';
+  d2b.style.color = v.qualD2 ? 'var(--blue)' : 'var(--amber)';
+}
+document.getElementById('switchVendorBtn').addEventListener('click', () => { STATE.selected = null; renderVendedorPage(); });
+
+function renderAll() { renderGeral(); renderRanking(); renderVendedorPage(); }
 
 /* ====================== Nav ====================== */
+const PAGE_META = {
+  geral: ['Geral da Campanha', 'Como a equipe Moutinho está indo na campanha Amanco Wavin'],
+  ranking: ['Ranking Geral', 'Veja a corrida completa dos dois desafios da campanha'],
+  vendedor: ['Por Vendedor', 'Acompanhe o desempenho individual de cada vendedor'],
+};
 function showPage(page) {
-  currentPage = page;
+  if (page === 'vendedor') { STATE.selected = null; renderVendedorPage(); }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
   document.querySelectorAll('.nav-item, .bottom-nav button').forEach(b => b.classList.toggle('active', b.dataset.page === page));
-  document.getElementById('pageTitle').textContent = page === 'inicio' ? 'Início' : 'Ranking';
-  document.getElementById('pageSub').textContent = page === 'inicio' ? 'Seu acompanhamento da Campanha Amanco Wavin' : 'Veja como está a corrida dos dois desafios';
+  document.getElementById('pageTitle').textContent = PAGE_META[page][0];
+  document.getElementById('pageSub').textContent = PAGE_META[page][1];
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 document.querySelectorAll('.nav-item, .bottom-nav button').forEach(b => b.addEventListener('click', () => showPage(b.dataset.page)));
