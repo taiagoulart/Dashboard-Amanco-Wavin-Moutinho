@@ -167,7 +167,7 @@
   .tab.active{background:var(--black); color:#fff;}
 
   /* -------- HORSE RACE -------- */
-  .race-card{padding:26px 28px 24px 28px; overflow:hidden; background:linear-gradient(180deg,#fff,#fcfcfd);}
+  .race-card{padding:26px 28px 30px 28px; background:linear-gradient(180deg,#fff,#fcfcfd);}
   .race-title{font-weight:800; font-size:15.5px; display:flex; align-items:center; gap:8px;}
   .race-sub{font-size:11.5px; color:var(--gray-500); font-weight:600; margin-bottom:20px;}
   .track-wrap{position:relative; padding-right:44px;}
@@ -310,7 +310,7 @@
 <div class="app">
   <aside class="sidebar">
     <div class="sidebar-logo"><img src="" id="sbLogo" alt="Moutinho"></div>
-    <div class="campaign-tag">🏆 Desafio Fechamento 2026</div>
+    <div class="campaign-tag">🏆 Desafio Amanco Wavin 2026</div>
     <nav class="nav">
       <button class="nav-item active" data-page="geral">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 15l4-5 3 3 5-7"/></svg>
@@ -562,6 +562,18 @@ function parseNumberLoose(raw) {
   return num;
 }
 function cellsInclude(row, text) { return row.some(c => (c || '').trim().toLowerCase().includes(text.toLowerCase())); }
+function parseRank(raw) {
+  if (!raw || raw === '-' || raw === '—') return null;
+  const hasPct = raw.includes('%');
+  let n = parseInt(raw.replace(/[^0-9\-]/g, ''), 10);
+  if (isNaN(n)) return null;
+  // Defensive: a "Ranking" cell should be a small position number (1, 2, 3...).
+  // If it arrives formatted as a percentage (a spreadsheet formatting slip turns
+  // rank 1 into "100%"), undo that scaling here so the dashboard is correct
+  // even before the sheet itself gets fixed.
+  if (hasPct) n = Math.round(n / 100);
+  return n;
+}
 function findRowIndex(rows, matchFn) { for (let i = 0; i < rows.length; i++) if (matchFn(rows[i])) return i; return -1; }
 
 function parseVendorTable(rows) {
@@ -589,8 +601,8 @@ function parseVendorTable(rows) {
     vendors.push({
       nome: r[cVend].trim(), vendas: parseNumberLoose(r[cVendas]), margem: parseNumberLoose(r[cMargem]),
       pctMeta: parseNumberLoose(r[cPctMeta]), qualD1, qualD2,
-      rankD1: rankD1raw && rankD1raw !== '-' ? parseInt(rankD1raw, 10) : null,
-      rankD2: rankD2raw && rankD2raw !== '-' ? parseInt(rankD2raw, 10) : null,
+      rankD1: parseRank(rankD1raw),
+      rankD2: parseRank(rankD2raw),
     });
   }
   return { vendors };
@@ -802,7 +814,7 @@ function renderRankList(containerId, vendors, valueKey, qualKey, rankKey, fmt) {
       ${avatarInnerHTML(v.nome, '')}
       <div class="r-info">
         <div class="r-name">${v.nome}</div>
-        <span class="r-tag ${v[qualKey] ? 'on' : 'off'}">${v[qualKey] ? '✅ Na disputa' : '🚀 Em construção'}</span>
+        <span class="r-tag ${v[qualKey] ? 'on' : 'off'}">${v[qualKey] ? '✅ Na disputa' : '🔥 Aquecendo'}</span>
       </div>
       <div class="r-bar"><div class="bar-track"><div class="bar-fill" style="width:${(v[valueKey] / maxVal * 100)}%;background:${v[qualKey] ? 'var(--red)' : 'var(--orange)'}"></div></div></div>
       <div class="r-val">${fmt(v[valueKey])}</div>
@@ -874,7 +886,7 @@ function renderVendedorPage() {
   document.getElementById('d1FootLeft').textContent = v.qualD1 ? (v.rankD1 ? `${v.rankD1}º no ranking` : 'Qualificado') : fmtPct(v.pctMeta) + ' do gatilho';
   document.getElementById('d1FootRight').textContent = v.qualD1 ? '✅ Na disputa' : `Faltam ${fmtBRL(Math.max(cfg.gatilhoD1 - v.vendas, 0))}`;
   const d1b = document.getElementById('d1Badge');
-  d1b.textContent = v.qualD1 ? '✅ Na disputa' : '🚀 Em construção';
+  d1b.textContent = v.qualD1 ? '✅ Na disputa' : '🔥 Aquecendo';
   d1b.style.background = v.qualD1 ? 'var(--green-bg)' : 'var(--amber-bg)';
   d1b.style.color = v.qualD1 ? 'var(--green)' : 'var(--amber)';
 
@@ -885,7 +897,7 @@ function renderVendedorPage() {
   document.getElementById('d2FootLeft').textContent = v.qualD2 ? (v.rankD2 ? `${v.rankD2}º no ranking` : 'Qualificado') : 'Em andamento';
   document.getElementById('d2FootRight').textContent = v.qualD2 ? '✅ Na disputa' : (v.vendas < cfg.gatilhoD2 ? `Faltam ${fmtBRL(Math.max(cfg.gatilhoD2 - v.vendas, 0))} em vendas` : 'Suba a margem');
   const d2b = document.getElementById('d2Badge');
-  d2b.textContent = v.qualD2 ? '✅ Na disputa' : '🚀 Em construção';
+  d2b.textContent = v.qualD2 ? '✅ Na disputa' : '🔥 Aquecendo';
   d2b.style.background = v.qualD2 ? 'var(--blue-bg)' : 'var(--amber-bg)';
   d2b.style.color = v.qualD2 ? 'var(--blue)' : 'var(--amber)';
 }
