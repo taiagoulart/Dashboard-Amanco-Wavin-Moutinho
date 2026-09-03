@@ -250,7 +250,11 @@
   .r-tag.on{background:var(--green-bg); color:var(--green);}
   .r-tag.off{background:var(--amber-bg); color:var(--amber);}
   .rank-row .r-bar{flex:1;}
-  .rank-row .r-val{width:110px; text-align:right; font-weight:800; font-size:14px; flex-shrink:0;}
+  .rank-row .r-val{width:135px; text-align:right; font-weight:800; font-size:14px; flex-shrink:0;}
+  .r-val-sub{font-size:10.5px; color:var(--gray-500); font-weight:600; margin-top:1px;}
+
+  .race-divider{display:flex; align-items:center; gap:10px; margin:4px 0 16px 0; color:var(--gray-500); font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:.4px;}
+  .race-divider::before, .race-divider::after{content:''; flex:1; height:1px; background:var(--gray-200);}
 
   .empty-race{background:var(--gray-50); border:1.5px dashed var(--gray-200); border-radius:16px; padding:26px; text-align:center; width:100%;}
   .empty-race .e-title{font-weight:800; font-size:14px;}
@@ -392,12 +396,6 @@
               <div class="mini-lbl">vendedores já na disputa</div>
               <div class="podium podium-compact" id="podiumD2Geral"></div>
             </div>
-          </div>
-
-          <div class="section-label">🎁 Prêmios da campanha</div>
-          <div class="card pizza-card" id="prizePoolCard">
-            <div class="pizza-ic">🎁</div>
-            <div><div class="pizza-title" id="prizePoolTitle">Carregando...</div><div class="pizza-sub" id="prizePoolSub"></div></div>
           </div>
 
           <div class="section-label">🍕 Meta geral & rodízio</div>
@@ -751,11 +749,6 @@ function renderGeral() {
   renderPodium('podiumD1Geral', vs, 'rankD1', 'vendas', fmtBRL, cfg.premioD1);
   renderPodium('podiumD2Geral', vs, 'rankD2', 'margem', fmtPct, cfg.premioD2);
 
-  const totalPrizes = cfg.premioD1.reduce((a, b) => a + b, 0) + cfg.premioD2.reduce((a, b) => a + b, 0);
-  document.getElementById('prizePoolTitle').textContent = `${fmtBRL(totalPrizes)} em premiações para os dois desafios`;
-  document.getElementById('prizePoolSub').textContent =
-    `Desafio 1: ${fmtBRL(cfg.premioD1[0])} / ${fmtBRL(cfg.premioD1[1])} / ${fmtBRL(cfg.premioD1[2])} · Desafio 2: ${fmtBRL(cfg.premioD2[0])} / ${fmtBRL(cfg.premioD2[1])} / ${fmtBRL(cfg.premioD2[2])}`;
-
   const pizzaCard = document.getElementById('pizzaCard');
   if (meta.batida) {
     pizzaCard.classList.add('won');
@@ -782,12 +775,17 @@ function fmtCompact(v) {
   if (v >= 1000) return 'R$ ' + Math.round(v / 1000) + ' mil';
   return fmtBRL(v);
 }
-function renderRace(containerId, vendors, valueKey, qualKey, rankKey, scaleMax, gatilho, fmt, sortFn, gatilhoLabel) {
+function renderRace(containerId, vendors, valueKey, qualKey, rankKey, scaleMax, gatilho, fmt, sortFn, gatilhoLabel, splitLabel) {
   const el = document.getElementById(containerId);
   const sorted = sortFn ? sortFn(vendors) : [...vendors].sort((a, b) => b[valueKey] - a[valueKey]);
   const gatilhoPct = Math.min(gatilho / scaleMax, 1) * 100;
   let html = `<div class="track-gatilho" style="left:${gatilhoPct}%"><div class="tg-label">${gatilhoLabel || 'GATILHO'}</div></div>`;
+  let dividerDone = !splitLabel;
   sorted.forEach(v => {
+    if (!dividerDone && !v[qualKey]) {
+      html += `<div class="race-divider"><span>${splitLabel}</span></div>`;
+      dividerDone = true;
+    }
     const rawPct = Math.min(Math.max(v[valueKey] / scaleMax, 0), 1) * 100;
     const pct = Math.max(rawPct, 3); // keep the avatar marker visually inside the track even for near-zero values
     const rank = v[rankKey];
@@ -828,7 +826,7 @@ function renderPodium(containerId, vendors, rankKey, valueKey, fmt, premios) {
     </div>`;
   }).join('');
 }
-function renderRankList(containerId, vendors, valueKey, qualKey, rankKey, fmt, sortFn) {
+function renderRankList(containerId, vendors, valueKey, qualKey, rankKey, fmt, sortFn, subFmt) {
   const el = document.getElementById(containerId);
   const sorted = sortFn ? sortFn(vendors) : [...vendors].sort((a, b) => b[valueKey] - a[valueKey]);
   const maxVal = Math.max(...sorted.map(v => v[valueKey]), 1);
@@ -844,7 +842,7 @@ function renderRankList(containerId, vendors, valueKey, qualKey, rankKey, fmt, s
         <span class="r-tag ${v[qualKey] ? 'on' : 'off'}">${v[qualKey] ? '✅ Na disputa' : '🔥 Aquecendo'}</span>
       </div>
       <div class="r-bar"><div class="bar-track"><div class="bar-fill" style="width:${(v[valueKey] / maxVal * 100)}%;background:${v[qualKey] ? 'var(--red)' : 'var(--orange)'}"></div></div></div>
-      <div class="r-val">${fmt(v[valueKey])}</div>
+      <div class="r-val">${fmt(v[valueKey])}${subFmt ? `<div class="r-val-sub">${subFmt(v)}</div>` : ''}</div>
     </div>`;
   }).join('');
 }
@@ -855,11 +853,12 @@ function renderRanking() {
   const scaleD1 = Math.max(...vs.map(v => v.vendas), cfg.gatilhoD1) * 1.12;
   renderRace('raceD1', vs, 'vendas', 'qualD1', 'rankD1', scaleD1, cfg.gatilhoD1, fmtBRL, null, `GATILHO · ${fmtCompact(cfg.gatilhoD1)}`);
 
-  renderRankList('rankListD2', vs, 'margem', 'qualD2', 'rankD2', fmtPct, sortD2);
+  renderRankList('rankListD2', vs, 'margem', 'qualD2', 'rankD2', fmtPct, sortD2, (v) => 'Vendas: ' + fmtBRL(v.vendas));
   renderPodium('podiumD2', vs, 'rankD2', 'margem', fmtPct, cfg.premioD2);
   const scaleD2 = Math.max(...vs.map(v => v.margem), cfg.margemMin) * 1.25;
   renderRace('raceD2', vs, 'margem', 'qualD2', 'rankD2', scaleD2, cfg.margemMin, fmtPct, sortD2,
-    `GATILHO · ${fmtPct(cfg.margemMin)} + ${fmtCompact(cfg.gatilhoD2)} vendas`);
+    `GATILHO · ${fmtPct(cfg.margemMin)} + ${fmtCompact(cfg.gatilhoD2)} vendas`,
+    `🔥 Ainda buscando o gatilho de ${fmtCompact(cfg.gatilhoD2)} em vendas`);
 }
 
 /* ====================== Render: Por Vendedor ====================== */
