@@ -44,8 +44,8 @@
   .sidebar-logo img{width:100%; max-width:172px; display:block; border-radius:10px;}
   .campaign-tag{
     display:flex; align-items:center; gap:6px; background:linear-gradient(135deg,var(--red),#B8151A);
-    color:#fff; font-size:10.5px; font-weight:800; letter-spacing:0.3px; border-radius:100px;
-    padding:7px 13px; margin:0 2px 22px 2px; width:fit-content;
+    color:#fff; font-size:10.5px; font-weight:800; letter-spacing:0.2px; border-radius:16px; line-height:1.35;
+    padding:8px 13px; margin:0 2px 22px 2px; width:fit-content; max-width:100%;
   }
 
   .nav{display:flex; flex-direction:column; gap:4px; flex:1;}
@@ -151,6 +151,16 @@
   .mini-leader .ph{background:var(--black); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:12px;}
   .mini-leader .ml-name{font-weight:800; font-size:12.5px;}
   .mini-leader .ml-val{font-size:11.5px; color:var(--gray-500); font-weight:700;}
+  .podium-compact{margin-top:14px; padding:0; gap:8px;}
+  .podium-compact .pod-slot{width:auto; flex:1;}
+  .podium-compact .pod-slot.p1 img, .podium-compact .pod-slot.p1 .ph{width:60px; height:60px;}
+  .podium-compact .pod-slot.p2 img, .podium-compact .pod-slot.p2 .ph{width:48px; height:48px;}
+  .podium-compact .pod-slot.p3 img, .podium-compact .pod-slot.p3 .ph{width:48px; height:48px;}
+  .podium-compact .pod-slot.p1 .pod-base{height:44px;}
+  .podium-compact .pod-slot.p2 .pod-base{height:32px;}
+  .podium-compact .pod-slot.p3 .pod-base{height:24px;}
+  .podium-compact .pod-name{font-size:12.5px;}
+  .podium-compact .pod-val{font-size:13.5px;}
 
   /* Pizza banner */
   .pizza-card{
@@ -310,7 +320,7 @@
 <div class="app">
   <aside class="sidebar">
     <div class="sidebar-logo"><img src="" id="sbLogo" alt="Moutinho"></div>
-    <div class="campaign-tag">🏆 Desafio Amanco Wavin 2026</div>
+    <div class="campaign-tag">🏆 Desafio Fechamento Amanco Wavin 2026</div>
     <nav class="nav">
       <button class="nav-item active" data-page="geral">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 15l4-5 3 3 5-7"/></svg>
@@ -362,7 +372,7 @@
             <div class="hmsg" id="motivMsg">Carregando o progresso da equipe...</div>
           </div>
 
-          <div class="section-label">Resumo dos desafios</div>
+          <div class="section-label">🏆 Pódio dos desafios</div>
           <div class="grid grid-2">
             <div class="card mini-card">
               <div class="mini-top">
@@ -371,7 +381,7 @@
               </div>
               <div class="mini-stat" id="d1MiniCount">0 de 0</div>
               <div class="mini-lbl">vendedores já na disputa</div>
-              <div class="mini-leader" id="d1MiniLeader"></div>
+              <div class="podium podium-compact" id="podiumD1Geral"></div>
             </div>
             <div class="card mini-card">
               <div class="mini-top">
@@ -380,8 +390,14 @@
               </div>
               <div class="mini-stat" id="d2MiniCount">0 de 0</div>
               <div class="mini-lbl">vendedores já na disputa</div>
-              <div class="mini-leader" id="d2MiniLeader"></div>
+              <div class="podium podium-compact" id="podiumD2Geral"></div>
             </div>
+          </div>
+
+          <div class="section-label">🎁 Prêmios da campanha</div>
+          <div class="card pizza-card" id="prizePoolCard">
+            <div class="pizza-ic">🎁</div>
+            <div><div class="pizza-title" id="prizePoolTitle">Carregando...</div><div class="pizza-sub" id="prizePoolSub"></div></div>
           </div>
 
           <div class="section-label">🍕 Meta geral & rodízio</div>
@@ -424,7 +440,7 @@
             <div class="section-label">🐎 Corrida da campanha</div>
             <div class="card race-card">
               <div class="race-title">Margem de Venda Amanco Wavin</div>
-              <div class="race-sub">A linha vermelha marca a margem mínima exigida. Quem passa dela entra oficialmente na disputa pelo pódio.</div>
+              <div class="race-sub">A linha vermelha marca a margem mínima exigida — mas só vale se as vendas também passarem de R$ 100.000,00. Quem ainda não bateu essa venda mínima aparece ordenado pela proximidade desse gatilho, não pela margem.</div>
               <div class="track-wrap" id="raceD2"></div>
               <div class="finish-flag-end">🏁</div>
             </div>
@@ -732,15 +748,13 @@ function renderGeral() {
   const qualD1 = vs.filter(v => v.qualD1).length, qualD2 = vs.filter(v => v.qualD2).length;
   document.getElementById('d1MiniCount').textContent = `${qualD1} de ${vs.length}`;
   document.getElementById('d2MiniCount').textContent = `${qualD2} de ${vs.length}`;
-  const leaderD1 = vs.find(v => v.rankD1 === 1), leaderD2 = vs.find(v => v.rankD2 === 1);
-  const leaderHTML = (v, valStr) => v
-    ? `${avatarInnerHTML(v.nome, 'ml-av')}<div><div class="ml-name">🥇 ${v.nome}</div><div class="ml-val">${valStr}</div></div>`
-    : `<div class="ml-name" style="color:var(--gray-500)">Ainda sem líder — a corrida está começando</div>`;
-  document.getElementById('d1MiniLeader').innerHTML = leaderHTML(leaderD1, leaderD1 ? fmtBRL(leaderD1.vendas) : '');
-  document.getElementById('d2MiniLeader').innerHTML = leaderHTML(leaderD2, leaderD2 ? fmtPct(leaderD2.margem) : '');
-  document.querySelectorAll('#d1MiniLeader img, #d1MiniLeader .ph, #d2MiniLeader img, #d2MiniLeader .ph').forEach(el => {
-    el.style.width = '32px'; el.style.height = '32px'; el.style.borderRadius = '50%'; el.style.objectFit = 'cover';
-  });
+  renderPodium('podiumD1Geral', vs, 'rankD1', 'vendas', fmtBRL, cfg.premioD1);
+  renderPodium('podiumD2Geral', vs, 'rankD2', 'margem', fmtPct, cfg.premioD2);
+
+  const totalPrizes = cfg.premioD1.reduce((a, b) => a + b, 0) + cfg.premioD2.reduce((a, b) => a + b, 0);
+  document.getElementById('prizePoolTitle').textContent = `${fmtBRL(totalPrizes)} em premiações para os dois desafios`;
+  document.getElementById('prizePoolSub').textContent =
+    `Desafio 1: ${fmtBRL(cfg.premioD1[0])} / ${fmtBRL(cfg.premioD1[1])} / ${fmtBRL(cfg.premioD1[2])} · Desafio 2: ${fmtBRL(cfg.premioD2[0])} / ${fmtBRL(cfg.premioD2[1])} / ${fmtBRL(cfg.premioD2[2])}`;
 
   const pizzaCard = document.getElementById('pizzaCard');
   if (meta.batida) {
@@ -756,19 +770,32 @@ function renderGeral() {
 }
 
 /* ====================== Render: Ranking Geral ====================== */
-function renderRace(containerId, vendors, valueKey, qualKey, rankKey, scaleMax, gatilho, fmt) {
+function sortD2(vendors) {
+  return [...vendors].sort((a, b) => {
+    if (!!a.qualD2 !== !!b.qualD2) return a.qualD2 ? -1 : 1;
+    if (a.qualD2) return b.margem - a.margem;
+    return b.vendas - a.vendas;
+  });
+}
+function fmtCompact(v) {
+  if (v >= 1000000) return 'R$ ' + (v / 1000000).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + ' mi';
+  if (v >= 1000) return 'R$ ' + Math.round(v / 1000) + ' mil';
+  return fmtBRL(v);
+}
+function renderRace(containerId, vendors, valueKey, qualKey, rankKey, scaleMax, gatilho, fmt, sortFn, gatilhoLabel) {
   const el = document.getElementById(containerId);
-  const sorted = [...vendors].sort((a, b) => b[valueKey] - a[valueKey]);
+  const sorted = sortFn ? sortFn(vendors) : [...vendors].sort((a, b) => b[valueKey] - a[valueKey]);
   const gatilhoPct = Math.min(gatilho / scaleMax, 1) * 100;
-  let html = `<div class="track-gatilho" style="left:${gatilhoPct}%"><div class="tg-label">GATILHO</div></div>`;
+  let html = `<div class="track-gatilho" style="left:${gatilhoPct}%"><div class="tg-label">${gatilhoLabel || 'GATILHO'}</div></div>`;
   sorted.forEach(v => {
-    const pct = Math.min(Math.max(v[valueKey] / scaleMax, 0), 1) * 100;
+    const rawPct = Math.min(Math.max(v[valueKey] / scaleMax, 0), 1) * 100;
+    const pct = Math.max(rawPct, 3); // keep the avatar marker visually inside the track even for near-zero values
     const rank = v[rankKey];
     const rankClass = rank === 1 ? 'rank1' : rank === 2 ? 'rank2' : rank === 3 ? 'rank3' : '';
     const fillClass = rank === 1 ? 'top1' : rank === 2 ? 'top2' : rank === 3 ? 'top3' : (v[qualKey] ? 'qualified' : 'pending');
     const laneClass = rank === 1 ? 'rank1' : '';
     html += `<div class="lane ${laneClass}">
-      <div class="lane-fill ${fillClass}" style="width:${pct}%"></div>
+      <div class="lane-fill ${fillClass}" style="width:${rawPct}%"></div>
       <div class="horse ${rankClass}" style="left:${pct}%">
         <span style="position:relative">${avatarInnerHTML(v.nome, 'h-avatar')}${rank ? `<span class="h-pos">${rank}</span>` : ''}</span>
         <span class="h-tag"><span class="h-name">${v.nome}</span><span class="h-val">${fmt(v[valueKey])}</span></span>
@@ -801,9 +828,9 @@ function renderPodium(containerId, vendors, rankKey, valueKey, fmt, premios) {
     </div>`;
   }).join('');
 }
-function renderRankList(containerId, vendors, valueKey, qualKey, rankKey, fmt) {
+function renderRankList(containerId, vendors, valueKey, qualKey, rankKey, fmt, sortFn) {
   const el = document.getElementById(containerId);
-  const sorted = [...vendors].sort((a, b) => b[valueKey] - a[valueKey]);
+  const sorted = sortFn ? sortFn(vendors) : [...vendors].sort((a, b) => b[valueKey] - a[valueKey]);
   const maxVal = Math.max(...sorted.map(v => v[valueKey]), 1);
   el.innerHTML = sorted.map((v, i) => {
     const rk = v[rankKey];
@@ -826,12 +853,13 @@ function renderRanking() {
   renderRankList('rankListD1', vs, 'vendas', 'qualD1', 'rankD1', fmtBRL);
   renderPodium('podiumD1', vs, 'rankD1', 'vendas', fmtBRL, cfg.premioD1);
   const scaleD1 = Math.max(...vs.map(v => v.vendas), cfg.gatilhoD1) * 1.12;
-  renderRace('raceD1', vs, 'vendas', 'qualD1', 'rankD1', scaleD1, cfg.gatilhoD1, fmtBRL);
+  renderRace('raceD1', vs, 'vendas', 'qualD1', 'rankD1', scaleD1, cfg.gatilhoD1, fmtBRL, null, `GATILHO · ${fmtCompact(cfg.gatilhoD1)}`);
 
-  renderRankList('rankListD2', vs, 'margem', 'qualD2', 'rankD2', fmtPct);
+  renderRankList('rankListD2', vs, 'margem', 'qualD2', 'rankD2', fmtPct, sortD2);
   renderPodium('podiumD2', vs, 'rankD2', 'margem', fmtPct, cfg.premioD2);
   const scaleD2 = Math.max(...vs.map(v => v.margem), cfg.margemMin) * 1.25;
-  renderRace('raceD2', vs, 'margem', 'qualD2', 'rankD2', scaleD2, cfg.margemMin, fmtPct);
+  renderRace('raceD2', vs, 'margem', 'qualD2', 'rankD2', scaleD2, cfg.margemMin, fmtPct, sortD2,
+    `GATILHO · ${fmtPct(cfg.margemMin)} + ${fmtCompact(cfg.gatilhoD2)} vendas`);
 }
 
 /* ====================== Render: Por Vendedor ====================== */
