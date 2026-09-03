@@ -438,7 +438,7 @@
             <div class="section-label">🐎 Corrida da campanha</div>
             <div class="card race-card">
               <div class="race-title">Margem de Venda Amanco Wavin</div>
-              <div class="race-sub">A linha vermelha marca a margem mínima exigida — mas só vale se as vendas também passarem de R$ 100.000,00. Quem ainda não bateu essa venda mínima aparece ordenado pela proximidade desse gatilho, não pela margem.</div>
+              <div class="race-sub">A linha vermelha marca a margem mínima exigida — mas só vale se as vendas também passarem de R$ 100.000,00. Todo mundo aparece ordenado pela margem, mas quem ainda não bateu essa venda mínima fica abaixo de quem já está oficialmente na disputa.</div>
               <div class="track-wrap" id="raceD2"></div>
               <div class="finish-flag-end">🏁</div>
             </div>
@@ -766,8 +766,7 @@ function renderGeral() {
 function sortD2(vendors) {
   return [...vendors].sort((a, b) => {
     if (!!a.qualD2 !== !!b.qualD2) return a.qualD2 ? -1 : 1;
-    if (a.qualD2) return b.margem - a.margem;
-    return b.vendas - a.vendas;
+    return b.margem - a.margem; // both groups ranked by margem — qualified group always sits above
   });
 }
 function fmtCompact(v) {
@@ -853,7 +852,7 @@ function renderRanking() {
   const scaleD1 = Math.max(...vs.map(v => v.vendas), cfg.gatilhoD1) * 1.12;
   renderRace('raceD1', vs, 'vendas', 'qualD1', 'rankD1', scaleD1, cfg.gatilhoD1, fmtBRL, null, `GATILHO · ${fmtCompact(cfg.gatilhoD1)}`);
 
-  renderRankList('rankListD2', vs, 'margem', 'qualD2', 'rankD2', fmtPct, sortD2, (v) => 'Vendas: ' + fmtBRL(v.vendas));
+  renderRankList('rankListD2', vs, 'margem', 'qualD2', 'rankD2', fmtPct, sortD2);
   renderPodium('podiumD2', vs, 'rankD2', 'margem', fmtPct, cfg.premioD2);
   const scaleD2 = Math.max(...vs.map(v => v.margem), cfg.margemMin) * 1.25;
   renderRace('raceD2', vs, 'margem', 'qualD2', 'rankD2', scaleD2, cfg.margemMin, fmtPct, sortD2,
