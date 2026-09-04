@@ -752,13 +752,13 @@ function renderGeral() {
   const pizzaCard = document.getElementById('pizzaCard');
   if (meta.batida) {
     pizzaCard.classList.add('won');
-    document.getElementById('pizzaTitle').textContent = '🎉 Meta geral batida — rodízio de pizza garantido!';
-    document.getElementById('pizzaSub').textContent = 'A equipe de apoio comercial já garantiu a recompensa da campanha.';
+    document.getElementById('pizzaTitle').textContent = '🎉 Meta geral batida — rodízio de pizza pra empresa toda!';
+    document.getElementById('pizzaSub').textContent = 'Todo mundo da Moutinho já garantiu essa comemoração da campanha.';
   } else {
     pizzaCard.classList.remove('won');
     const falta = Math.max(meta.gatilho - meta.totalVendido, 0);
-    document.getElementById('pizzaTitle').textContent = 'Ao bater a meta geral, rola rodízio de pizza pra equipe de apoio 🍕';
-    document.getElementById('pizzaSub').textContent = `Faltam ${fmtBRL(falta)} em vendas da equipe para liberar.`;
+    document.getElementById('pizzaTitle').textContent = 'Ao bater a meta geral, rola rodízio de pizza pra empresa inteira 🍕';
+    document.getElementById('pizzaSub').textContent = `Faltam ${fmtBRL(falta)} em vendas da equipe para liberar essa comemoração pra todo mundo.`;
   }
 }
 
